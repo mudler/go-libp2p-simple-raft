@@ -21,7 +21,7 @@ ctx := context.Background()
 // start a libp2p node (not done here)
 
 // NewSimpleRaft needs a libp2p host, a state to calculate consensus on, and a channel to listen for new peers that are discovered
-w, err := simpleraft.NewSimpleRaft(h, &raftState{Value: 3}, peerChan)
+w, err := simpleraft.NewSimpleRaft(ctx, h, &raftState{Value: 3}, peerChan)
 if err != nil {
     fmt.Println(err)
 }

@@ -57,7 +57,7 @@ func (rw *SimpleRaft) GetLeader() (peer.AddrInfo, error) {
 	return rw.peerStores[leader.String()], nil
 }
 
-func NewSimpleRaft(h host.Host, state consensus.State, peerChan chan peer.AddrInfo) (*SimpleRaft, error) {
+func NewSimpleRaft(ctx context.Context, h host.Host, state consensus.State, peerChan chan peer.AddrInfo) (*SimpleRaft, error) {
 
 	servers := make([]hraft.Server, 0)
 	for _, h := range []host.Host{h} {
@@ -130,7 +130,7 @@ func NewSimpleRaft(h host.Host, state consensus.State, peerChan chan peer.AddrIn
 		},
 	})
 
-	w.trackPeers(context.Background(), peerChan)
+	w.trackPeers(ctx, peerChan)
 	return w, nil
 }
 
